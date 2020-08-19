@@ -8,7 +8,6 @@ pipeline {
             steps {
                 echo 'Build Package file jar'
                 echo '******************************'
-                sh 'mvn clean install -U -Dmaven.test.skip=true -DskipTests -s D:\Users\s91701\.m2\settings.xml'
             }
         }
 
@@ -26,15 +25,10 @@ pipeline {
             }
         }
 
-        ...
-
         stage('Start app on server') {
             steps{
                 echo 'Start app'
                 echo '******************************'
-				sh 'nohup java -jar -Dspring.profiles.active=batch-sit -Djavax.net.ssl.trustStore="/apps/ewht/cert/truststore.jks" 
-				-Djavax.net.ssl.trustStorePassword=changeit -Dserver.ssl.key-store=/apps/ewht/cert/keystore.jks -Dserver.ssl.key-store-type=jks 
-				-Dserver.ssl.key-store-password=changeit -Dserver.port=8543 ips-ewht-0.0.1-SNAPSHOT.jar > nohup.out &'
             }
         }
     }
